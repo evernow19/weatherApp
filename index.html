@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Hind+Guntur&display=swap" rel="stylesheet">
     <title>Weather</title>
@@ -28,13 +29,9 @@
                 <span class="iconify" data-icon="wi:day-sunny" data-inline="false" data-width="50"
                     data-height="50"></span>
                 <p class="today">
-                  <span class="temperature" id="temperature">17</span>
-                    <span class="units">
-                      <a href="#" id="celcius-link">°C </a> /
-                      <a href="#" id="fahrenheit-link">°F</a>
-                      </span> 
+                  <span class="temperature" id="temperature">17°C</span>
                     <br />
-                    Sunny
+                    <span id="description">Sunny</span>
                 </p>
             </div>
             <div class="details">
@@ -44,11 +41,11 @@
                             <div class="col">
 
                                 <h5 class="card-title">Feels Like</h5>
-                                <p> 16°C</p>
+                                <p id="feels-like"> 16°C</p>
                             </div>
                             <div class="col">
                                 <h5 class="card-title">Wind</h5>
-                                <p>SSE 24 kmh</p>
+                                <p id="wind">SSE 24 kmh</p>
                             </div>
                             <div class="col">
                                 <h5 class="card-title">Dew Point</h5>
@@ -58,7 +55,7 @@
                         <div class="row">
                             <div class="col">
                                 <h5 class="card-title">Humidity</h5>
-                                <p>40%</p>
+                                <p id="humidity">40%</p>
                             </div>
                             <div class="col">
                                 <h5 class="card-title">UV Index</h5>
@@ -66,7 +63,7 @@
                             </div>
                             <div class="col">
                                 <h5 class="card-title">Pressure</h5>
-                                <p> 1008.5 mb</p>
+                                <p id="pressure"> 1008.5 mb</p>
                             </div>
                         </div>
                     </div>
@@ -78,22 +75,26 @@
         <h4>
             Forecast
         </h4>
-        <div class="row ">
-            <div class="card p-3 mb-2 bg-transparent text-dark">
+        <div class="row forecast">
+            <div class="card p-3 mb-4 bg-transparent text-dark">
 
                 <div class="card-body">
-                    <h5 class="card-title">Wed,<br />October 14</h5>
-                    <p class="card-text">24°C
+                    <h5 class="card-title" id="today-forecast">Wednesday,
+                    
+                    <h5 class="forecast-date" id="today-date-forecast">October 14</h5>
+                   <br />
+                    <p class="card-text"> <span id="high-temp-first-day">24°C</span>
                         <br />
-                        7°C
+                        <span id="low-temp-first-day">7°C</span>
                     </p>
                     <i class="fas fa-wind"></i>
                 </div>
             </div>
-            <div class="card p-3 mb-2 bg-transparent text-dark">
+            <div class="card p-3 mb-4 bg-transparent text-dark">
 
                 <div class="card-body">
-                    <h5 class="card-title">Thu,<br />October 15</h5>
+                    <h5 class="card-title">Thu,<br />November 25</h5>
+                    <br />
                     <p class="card-text">12°C
                         <br />
                         0°C
@@ -101,10 +102,11 @@
                     <i class="fas fa-cloud-sun"></i>
                 </div>
             </div>
-            <div class="card p-3 mb-2 bg-transparent text-dark">
+            <div class="card p-3 mb-4 bg-transparent text-dark">
 
                 <div class="card-body">
-                    <h5 class="card-title">Fri,<br />October 16</h5>
+                    <h5 class="card-title">Fri,<br />November 26</h5>
+                    <br />
                     <p class="card-text">12°C
                         <br />
                         1°C
@@ -112,10 +114,11 @@
                     <i class="fas fa-cloud"></i>
                 </div>
             </div>
-            <div class="card p-3 mb-2 bg-transparent text-dark">
+            <div class="card p-3 mb-4 bg-transparent text-dark">
 
                 <div class="card-body">
-                    <h5 class="card-title">Sat,<br />October 17</h5>
+                    <h5 class="card-title">Sat,<br />November 27</h5>
+                    <br />
                     <p class="card-text">15°C
                         <br />
                         4°C
@@ -123,10 +126,11 @@
                     <i class="fas fa-sun"></i>
                 </div>
             </div>
-            <div class="card p-3 mb-2 bg-transparent text-dark">
+            <div class="card p-3 mb-4 bg-transparent text-dark">
             
                 <div class="card-body">
-                    <h5 class="card-title">Sun,<br />October 18</h5>
+                    <h5 class="card-title">Sun,<br />November 28</h5>
+                    <br />
                     <p class="card-text">15°C
                         <br />
                         4°C
@@ -134,10 +138,11 @@
                     <i class="fas fa-sun"></i>
                 </div>
             </div>
-            <div class="card p-3 mb-2 bg-transparent text-dark">
+            <div class="card p-3 mb-4 bg-transparent text-dark">
 
                 <div class="card-body ">
-                    <h5 class="card-title">Mon,<br />October 19</h5>
+                    <h5 class="card-title">Mon,<br />November 29</h5>
+                    <br />
                     <p class="card-text">9°C
                         <br />
                         4°C
