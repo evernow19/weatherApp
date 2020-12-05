@@ -5,8 +5,8 @@
   display: block;
   margin: 0 auto;
   margin-top: 40px;
-  padding: 40px;
-  width: 750px;
+  padding: 40px 0 0 10px;
+  width: 800px;
 }
 body {
   font-family: 'Hind Guntur', sans-serif;
@@ -26,6 +26,7 @@ h2 {
 }
 h4 {
   font-size: 18px;
+  margin-left: 15px;
 }
 h5 {
   font-size: 15px;
@@ -41,7 +42,7 @@ i {
 }
 .info {
   display: inline-block;
-  width: 40%;
+  width: 45%;
   float: left;
   text-align: center;
 }
@@ -59,23 +60,25 @@ i {
   height: 70px;
 }
 .details {
-  width: 50%;
+  width: 45%;
   display: inline-block;
   float: right;
+  margin-right: 40px;
 }
 .card {
   display: block;
   border: blueviolet solid 1px;
-  padding: 0 auto;
+  padding: 0 10px;
   margin: 0 5px;
 }
 .card-body {
-  padding: 0;
+  padding: 15px 0;
+  margin: 0;
 }
 
 .bilyk {
   overflow: auto;
-  margin-top: 20px;
+  margin: 20px 0;
 }
 .new {
   border: blueviolet solid 1px;
@@ -87,4 +90,14 @@ i {
 }
 .row {
   text-align: center;
+  margin: 0;
+}
+.card-title {
+  margin: 0;
+  padding: 0;
+}
+
+.forecast {
+  display: inline-block
+  float: right;
 }
